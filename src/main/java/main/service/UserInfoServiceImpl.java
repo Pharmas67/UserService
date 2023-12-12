@@ -2,12 +2,14 @@ package main.service;
 
 import io.r2dbc.spi.ConnectionFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.oauth2.jwt.Jwt;
 import lombok.extern.slf4j.Slf4j;
 import main.Repositories.UserRepository;
 import main.model.User;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,9 +20,12 @@ public class UserInfoServiceImpl implements UserInfoService{
     final private ConnectionFactory conn;
 
     @Override
-    public Mono<User> getUser(OAuth2ResourceServerProperties.Jwt jwt) {
-        var principals = jwt.;
+    public Mono<User> getUser(Jwt jwt) {
+        var payload = jwt.getClaims();
 
-        return null;
+        var getId = payload.get("id");
+        UUID id = (UUID) getId;
+
+        return repo.findById(id);
     }
 }
