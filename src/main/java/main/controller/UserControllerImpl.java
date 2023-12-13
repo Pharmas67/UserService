@@ -28,15 +28,6 @@ public class UserControllerImpl implements UserController {
         return service.createUser(user);
     }
 
-    @GetMapping(
-            path="/user/{id}",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    @Override
-    public Mono<User> getUserById(@PathVariable UUID id) {
-        return service.getUserById(id);
-    }
-
     @PostMapping(
             path="/",
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -49,12 +40,12 @@ public class UserControllerImpl implements UserController {
     }
 
     @DeleteMapping(
-            path="/user/{id}",
+            path="/deleteUser",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
 
     @Override
-    public Mono<Void> deleteUserById(@PathVariable UUID id) {
+    public Mono<Void> deleteUserById(@RequestBody UUID id) {
         return service.deleteUserById(id);
     }
 }

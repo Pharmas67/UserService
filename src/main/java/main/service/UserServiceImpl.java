@@ -31,11 +31,6 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Mono<User> getUserById(UUID id) {
-        return repo.findById(id);
-    }
-
-    @Override
     public Mono<User> updateUser(User user) {
         return repo.save(user);
     }

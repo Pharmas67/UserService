@@ -6,8 +6,7 @@ import main.model.User;
 import main.service.UserInfoService;
 import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -17,13 +16,13 @@ public class UserInfoControllerImpl implements UserInfoController{
 
     final private UserInfoService service;
 
-    @GetMapping(
+    @PostMapping(
             path="/getUser",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
 
     @Override
-    public Mono<User> getUser(Jwt jwt) {
+    public Mono<User> getUser(@RequestBody Jwt jwt) {
         return service.getUser(jwt);
     }
 }
