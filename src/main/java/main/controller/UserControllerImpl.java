@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import main.model.User;
 import main.service.UserService;
 import org.springframework.http.MediaType;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -35,8 +36,8 @@ public class UserControllerImpl implements UserController {
     )
 
     @Override
-    public Mono<User> updateUser(@RequestBody User user) {
-        return service.updateUser(user);
+    public Mono<User> updateUser(@RequestBody Jwt jwt) {
+        return service.updateUser(jwt);
     }
 
     @DeleteMapping(
@@ -45,7 +46,7 @@ public class UserControllerImpl implements UserController {
     )
 
     @Override
-    public Mono<Void> deleteUserById(@RequestBody UUID id) {
-        return service.deleteUserById(id);
+    public Mono<Void> deleteUserById(@RequestBody Jwt jwt) {
+        return service.deleteUserById(jwt);
     }
 }

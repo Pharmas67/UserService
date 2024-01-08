@@ -21,13 +21,9 @@ public class UserInfoServiceImpl implements UserInfoService{
 
     @Override
     public Mono<User> getUser(Jwt jwt) {
-        if(!jwt.hasClaim()){
-            return null;
-        }
         var payload = jwt.getClaims();
 
-        var getId = payload.get("id");
-        UUID id = (UUID) getId;
+        UUID id = (UUID) payload.get("id");
 
         return repo.findById(id);
     }
